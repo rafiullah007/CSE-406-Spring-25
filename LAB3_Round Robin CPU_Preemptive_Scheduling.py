@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <iomanip>
 #include <algorithm>
 using namespace std;
 
@@ -13,7 +14,7 @@ struct P {
     int WT;
     int turnaround;
 };
-//MD.Rafiullah Al Naim
+
 int main() {
     int n, timeQuantum;
     cout << "Enter number of processes: ";
@@ -36,10 +37,9 @@ int main() {
     sort(Ps.begin(), Ps.end(), [](P &a, P &b) {
         return a.AT < b.AT;
     });
-
+//MD.Rafiullah Al Naim
     queue<int> q;
     vector<bool> inQueue(n, false);
-
     int currentTime = 0;
     int completed = 0;
 
@@ -89,11 +89,26 @@ int main() {
         }
     }
 
-    cout << "\nPID\tArrival\tBurst\tCompletion\tWaiting\tTurnaround\n";
+    cout << "\n-------------------------------------------------------------\n";
+    cout << "| Process |  AT  |  BT  |  CT  |  TAT  |  WT   |\n";
+    cout << "-------------------------------------------------------------\n";
+
+    double totalWT = 0.0;
     for (const auto& p : Ps) {
-        cout << p.pid << "\t" << p.AT << "\t" << p.BT << "\t"
-             << p.CT << "\t\t" << p.WT << "\t" << p.turnaround << "\n";
+        cout << " | " << setw(7) << left << p.pid
+             << " | " << setw(5) << right << p.AT
+             << " | " << setw(5) << right << p.BT
+             << " | " << setw(5) << right << p.CT
+             << " | " << setw(6) << right << p.turnaround
+             << " | " << setw(6) << right << p.WT
+             << " |\n";
+        totalWT += p.WT;
     }
+    cout << "-------------------------------------------------------------\n";
+
+    double avgWT = totalWT / n;
+    cout << fixed << setprecision(2);
+    cout << "Average Waiting Time: " << avgWT << " units\n";
 
     return 0;
 }
