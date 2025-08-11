@@ -36,7 +36,7 @@ void priority_scheduling(Process Ps[], int n) {
                 }
             }
         }
-
+//Naim 150 
         if (idx != -1) {
 
             if (time < Ps[idx].at)
