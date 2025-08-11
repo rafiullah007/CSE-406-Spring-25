@@ -19,9 +19,9 @@ void priority_scheduling(Process Ps[], int n) {
 
     while (completedCount < n) {
         int idx = -1;
-        int highestPriority = 999999;
+        int highestPriority = 999999;  
 
-
+       
         for (int i = 0; i < n; i++) {
             if (!completed[i] && Ps[i].at <= time) {
                 if (Ps[i].priority < highestPriority) {
@@ -29,16 +29,15 @@ void priority_scheduling(Process Ps[], int n) {
                     idx = i;
                 }
                 else if (Ps[i].priority == highestPriority) {
-
+                  
                     if (Ps[i].at < Ps[idx].at) {
                         idx = i;
                     }
                 }
             }
         }
-//Naim 150 
-        if (idx != -1) {
 
+        if (idx != -1) {
             if (time < Ps[idx].at)
                 time = Ps[idx].at;
 
@@ -46,13 +45,12 @@ void priority_scheduling(Process Ps[], int n) {
             Ps[idx].ct = time;
             completed[idx] = true;
             completedCount++;
-        }
-        else {
+        } else {
+          
             time++;
         }
     }
-
-
+//Naim 150
     for (int i = 0; i < n; i++) {
         Ps[i].tat = Ps[i].ct - Ps[i].at;
         Ps[i].wt = Ps[i].tat - Ps[i].bt;
@@ -80,7 +78,6 @@ int main() {
 
     priority_scheduling(Ps, n);
 
-
     cout << "\nPID\tAT\tBT\tPriority\tCT\tTAT\tWT\n";
     for (int i = 0; i < n; i++) {
         cout << Ps[i].pid << "\t"
@@ -91,7 +88,6 @@ int main() {
              << Ps[i].tat << "\t"
              << Ps[i].wt << "\n";
     }
-
 
     double avg_tat = 0, avg_wt = 0;
     for (int i = 0; i < n; i++) {
