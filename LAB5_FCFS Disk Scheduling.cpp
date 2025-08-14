@@ -1,36 +1,37 @@
-#include <iostream>
-#include <cmath>
-
+#include<iostream>
+#include<cmath>
 using namespace std;
 
-int main() {
+int main()
+{
+    int n,head;
+    cout<<"Enter number of Disk Request : ";
+    cin>> n;
 
-    int request[] = {0, 16, 24, 43, 50, 82, 100, 140, 150, 170, 190, 199};
-    int n = sizeof(request) / sizeof(request[0]);
-    int initial_head = 50;
-    int total_head_movement = 0;
+    int req[100];
+    cout<<"Enter Disk Request Sequence : ";
 
-
-    int current_position = initial_head;
-
-
-    cout << "Request sequence: ";
-    for(int i = 0; i < n; i++) {
-        cout << request[i] << " ";
+    for(int i=0;i<n;i++)
+    {
+        cin>>req[i];
     }
-    cout << endl;
+    cout<<"Enter initial head position : ";
+    cin>> head;
 
+    int total_seak_op = 0;
+    int current = head;
 
-    for(int i = 0; i < n; i++) {
-
-        total_head_movement += abs(current_position - request[i]);
-
-
-        current_position = request[i];
+    cout<<"\nOrder of Execution : "<< current ;
+    for(int i=0;i<n;i++)
+    {
+        if(req[i]!=current){
+        total_seak_op += abs(req[i] - current);
+        current = req[i];
+        cout<< " -> "<<current ;
+        }
     }
-
-
-    cout << "Total head movement: " << total_head_movement << endl;
+    cout<< "\n Total head movement : "<<total_seak_op<<endl;
 
     return 0;
+
 }
