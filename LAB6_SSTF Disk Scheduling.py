@@ -1,21 +1,14 @@
 def SSTF(requests, head):
     total_seek = 0
     seek_sequence = []
-    requests = requests.copy()  # So we don't change the original list
+    requests = requests.copy()  
 
     while requests:
-        # Calculate distance from head to each request
         distances = [abs(r - head) for r in requests]
-        # Find index of closest request
         min_index = distances.index(min(distances))
-        # Fetch and remove the closest request
         closest_request = requests.pop(min_index)
-
-        # Calculate and add distance moved
         distance = abs(closest_request - head)
         total_seek += distance
-
-        # Move head and add to sequence
         head = closest_request
         seek_sequence.append(closest_request)
 #Naim150
