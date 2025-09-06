@@ -7,14 +7,14 @@ class Process:
         self.TAT = 0
         self.wt = 0
 
-def SJF_Non_Preemptive(Ps):
+def SJF_Non_Preemptive(Ps): 
     Ps.sort(key=lambda x: x.arrival_time)
     n = len(Ps)
     Done_Ps = 0
     current_time = 0
     ready_queue = []
 
-    while Done_Ps < n:
+    while Done_Ps < n:  // empty 
         for p in Ps:
             if p.arrival_time <= current_time and p not in ready_queue and p.completion_time == 0:
                 ready_queue.append(p)
